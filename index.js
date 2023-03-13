@@ -1,5 +1,5 @@
 import CharacterAI from 'node_characterai';
-import { OutgoingMessage, Reply } from 'node_characterai/message.js';
+import { OutgoingMessage, Reply, Message } from 'node_characterai/message.js';
 import EventEmitter from 'events';
 
 export default class Client {
@@ -12,8 +12,14 @@ export default class Client {
     return this;
   }
 
-  async getChat({ character, chat }) {
-    return this.cai.createOrContinueChat(character, chat);
+  async getChat(character) {
+    return this.cai.createOrContinueChat(character);
+  }
+
+  async resetChat(chat) {
+    const res = await chat.saveAndStartNewChat();
+    chat.changeToConversationId(res.external_id, true);
+    return new Message(chat, res.messages[0]);
   }
 
   async stream(chat, options) {

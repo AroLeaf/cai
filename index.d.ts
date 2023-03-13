@@ -1,5 +1,6 @@
 import EventEmitter from 'events';
-import { Reply } from 'node_characterai/message.js';
+import Chat from 'node_characterai/chat';
+import { Reply, Message } from 'node_characterai/message.js';
 
 export interface ReplyStream extends EventEmitter {
   done: Promise<Reply>
@@ -16,4 +17,6 @@ export interface ReplyStream extends EventEmitter {
 export default class Client {
   login(access_token: string): Promise<this>
   stream(chat, options): Promise<ReplyStream>
+  getChat(chat): Promise<Chat>
+  resetChat(chat): Promise<Message>
 }
