@@ -22,7 +22,12 @@ export default class Client {
     return new Message(chat, res.messages[0]);
   }
 
+  async send(chat, options) {
+    return chat.sendAndAwaitResponse(options, true);
+  }
+
   async stream(chat, options) {
+    throw new Error('Currently not supported');
     const payload = new OutgoingMessage(chat, options);
     
     const res = await fetch('https://beta.character.ai/chat/streaming/', {

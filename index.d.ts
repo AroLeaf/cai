@@ -5,13 +5,13 @@ import { Reply, Message } from 'node_characterai/message.js';
 export interface ReplyStream extends EventEmitter {
   done: Promise<Reply>
 
-  on(event: 'message', cb: (message: Reply) => void): ReplyStream
-  on(event: 'end', cb: (message: Reply) => void): ReplyStream
-  on(event: 'error', cb: (err: Error) => void): ReplyStream
+  on(event: 'message', cb: (message: Reply) => void): this
+  on(event: 'end', cb: (message: Reply) => void): this
+  on(event: 'error', cb: (err: Error) => void): this
 
-  once(event: 'message', cb: (message: Reply) => void): ReplyStream
-  once(event: 'end', cb: (message: Reply) => void): ReplyStream
-  once(event: 'error', cb: (err: Error) => void): ReplyStream
+  once(event: 'message', cb: (message: Reply) => void): this
+  once(event: 'end', cb: (message: Reply) => void): this
+  once(event: 'error', cb: (err: Error) => void): this
 }
 
 export default class Client {
